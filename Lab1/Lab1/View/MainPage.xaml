@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lab1"
+             x:Class="Lab1.MainPage">
+    <StackLayout>
+        <Entry  Text="{Binding Filtro}"/>
+        <Button Text="Filtrar" Command="{Binding FiltrarPersonaCommand}"/>
+        
+        <!-- El Binding hace que la lista tipo Observable (ObservableCollection lstPersonList) se pueda desplegar desde el XAML -->
+        <!--
+        <ListView ItemsSource="{Binding lstPersonList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                  -->  <!-- Este Binding es de un objeto perteneciente a la lista padre o el ItemsSource (lstPersonList) -->
+                   <!-- <TextCell Text="{Binding nombre}" Detail="{Binding descripcion}}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate> 
+        </ListView>
+        -->
+        <ListView ItemsSource="{Binding lstPersonList}" x:Name="lstViewPerson" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding nombre}" Detail="{Binding descripcion}" Command="{Binding EliminarPersonaCommand}" />
+                </DataTemplate>
+            </ListView.ItemTemplate> 
+        </ListView>
+
+        <Entry Text="{Binding NuevoIngreso}" />
+        <Button Text="Agregar Persona" Command="{Binding AgregarPersonaCommand}"/>
+    </StackLayout>
+
+</ContentPage>

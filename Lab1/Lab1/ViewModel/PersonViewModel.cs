@@ -18,14 +18,19 @@ namespace Lab1.ViewModel
         // Un Interface Command -> Para poder hacer el Bind del componente UI den MainPage.xaml
         public ICommand AgregarPersonaCommand { get; set; }
         public ICommand FiltrarPersonaCommand { get; set; }
+        public ICommand TextoBuscarCommand { get; set; }
 
-        public ICommand EliminarPersonaCommand { get; set; }
+        public ICommand BorrarPersonaCommand { get; set; }
 
         //private List<PersonModel> _lstPersonList = new List<PersonModel>();  // Este tipo de Lista no es Observable
 
         private ObservableCollection<PersonModel> _lstPersonList = new ObservableCollection<PersonModel>();  // Este tipo de Lista no es Observable
 
-        private ObservableCollection<PersonModel> _lstPersonListCopy = new ObservableCollection<PersonModel>();  // Este tipo de Lista no es Observable
+       // private ObservableCollection<PersonModel> _lstPersonListCopy = new ObservableCollection<PersonModel>();  // Este tipo de Lista no es Observable
+
+        // No se necesita en UI entonces no observable
+        private List<PersonModel> _lstPersonPivot = new List<PersonModel>();  // Este tipo de Lista no es Observable y va a ser Pivot
+
 
 
         // Se va a utilizar en el VIEW
@@ -63,33 +68,70 @@ namespace Lab1.ViewModel
             set { _Filtro = value; }
         }
 
+        // Para no usar el boton en el filtro
+        private string _TextoBuscar = String.Empty;
+
+        public String TextoBuscar
+        {
+            get { return _TextoBuscar; }
+            set {
+                _TextoBuscar = value;
+                onPropertyChanged("TextoBuscar");
+                FiltrarPersonaOnTextChanged(_TextoBuscar);
+            }
+        }
+
 
         #endregion
 
         public PersonViewModel(){
+            InitClass();
+            InitCommands();
+        }
+
+        private void InitClass() {
+            lstPersonList = PersonModel.ObtenerPersonas();
+            _lstPersonPivot = lstPersonList.ToList();  // Asignar la lista Observable a la lista PIVOT
+            Console.WriteLine("******** Cantidad de Datos en Lista -> Pivot="+_lstPersonPivot.Count()+",Observable="+lstPersonList.Count());
+        }
+
+        private void InitCommands() {
             AgregarPersonaCommand = new Command(AgregarPersona);
-            FiltrarPersonaCommand = new Command(FiltrarPersona);
-            EliminarPersonaCommand = new Command(EliminarPersona);
+            BorrarPersonaCommand = new Command<int>(BorrarPersona);  // se debe indicar que se espera un int
+            // Con nuevo metodo sin boton, usando Entry
+        }
+
+        private void FiltrarPersonaOnTextChanged(string textoBuscar)
+        {
+
+            lstPersonList.Clear(); // Esta sería la observable, la borro ya que solo necesito lo filtrado (Antes de esto debe guardarse los datos originales en la PIVOT)
+            _lstPersonPivot.Where(x => x.nombre.ToLower().Contains(textoBuscar.ToLower())).ToList().ForEach(x=> lstPersonList.Add(x));
+            
         }
 
         // El método que va a ir como objeto en el Command de arriba
         private void AgregarPersona() {
             
-            _lstPersonList.Add(new PersonModel("José Pablo", "Chaves","Alumno de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel("Pablo", "Rivera", "Alumno no matriculado de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel("Mónica", "Bermúdez", "Alumna de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel("Carlos", "Méndez", "Profesor de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel("Federico", "Brenes", "Alumno de curso VMWare"));
+            _lstPersonList.Add(new PersonModel(1,"José Pablo", "Chaves","Alumno de curso Xamarin"));
+            _lstPersonList.Add(new PersonModel(2,"Pablo", "Rivera", "Alumno no matriculado de curso Xamarin"));
+            _lstPersonList.Add(new PersonModel(3,"Mónica", "Bermúdez", "Alumna de curso Xamarin"));
+            _lstPersonList.Add(new PersonModel(4,"Carlos", "Méndez", "Profesor de curso Xamarin"));
+            _lstPersonList.Add(new PersonModel(5,"Federico", "Brenes", "Alumno de curso VMWare"));
 
            // _lstPersonListCopy = _lstPersonList;
            // _lstPersonList.Add(new PersonModel{ nombre = NuevoIngreso, descripcion = "Alumno de Xamarin" });
             Console.WriteLine("Agregadas ->"+_lstPersonList.Count);            
         }
 
-        private void EliminarPersona() {
-            Console.WriteLine("*** INGRESANDO EN ELIMINAR! ***");
+        private void BorrarPersona(int idPersona) {
+            Console.WriteLine("Eliminando al usuario con ID-> "+idPersona);
+            _lstPersonPivot.RemoveAll(x => x.id == idPersona);
+            lstPersonList.Clear();
+            lstPersonList = new ObservableCollection<PersonModel>(_lstPersonPivot);
+            Console.WriteLine("*** Validacion Count [Lista Pivot="+_lstPersonPivot.Count()+",Lista Observable="+lstPersonList.Count()+"]");
         }
 
+        /*
         private void FiltrarPersona()
         {
             string filterWord = Filtro.ToUpper();
@@ -101,12 +143,7 @@ namespace Lab1.ViewModel
             else {
                 _lstPersonListCopy = _lstPersonList;
             }
-            /*
-            Console.WriteLine("Cantidad de datos en Lista ->" + _lstPersonList.Count);
-            Console.WriteLine("Filtrando con: " +  filterWord);
-            _lstPersonList.Clear();
-            Console.WriteLine("Cantidad de datos en Lista después de borrar ->" + _lstPersonList.Count);
-            */
+          
             //ObservableCollection<PersonModel> lstBusqueda = 
             ObservableCollection<PersonModel> lstTmp = new ObservableCollection<PersonModel>();
             var query = _lstPersonList.Where(x => x.nombre.ToUpper().Contains(filterWord));
@@ -124,7 +161,7 @@ namespace Lab1.ViewModel
             Console.WriteLine("Cantidad de datos en copia: "+lstTmp.Count);
         }
 
-
+    */
 
         #region Notified Interface
         public event PropertyChangedEventHandler PropertyChanged;

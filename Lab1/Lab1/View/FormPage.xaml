@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="FormPage"
+             x:Class="Lab1.View.FormPage">
+    <StackLayout Orientation="Horizontal" x:Name="Superior">
+        <Image Source="delete.png" HorizontalOptions="Start" VerticalOptions="Center" />
+        <Label BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" x:Name="Medio">
+        <Image Source="delete.png" HorizontalOptions="Start" VerticalOptions="Center" />
+        <Label BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+    </StackLayout>
+
+    <Frame OutlineColor="Green"  Padding="0">
+        <StackLayout Orientation="Horizontal">
+            <Label HorizontalOptions="Start" VerticalOptions="Center" Text=""></Label>
+        </StackLayout>
+    </Frame>
+    
+</ContentPage>

@@ -2,26 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Lab1"
+             x:Name="MainPage"
              x:Class="Lab1.MainPage">
     <StackLayout>
-        <Entry  Text="{Binding Filtro}"/>
-        <Button Text="Filtrar" Command="{Binding FiltrarPersonaCommand}"/>
-        
-        <!-- El Binding hace que la lista tipo Observable (ObservableCollection lstPersonList) se pueda desplegar desde el XAML -->
         <!--
+        <StackLayout>
+            <Entry  Text="{Binding Filtro}"/>
+            <Button Text="Filtrar" Command="{Binding FiltrarPersonaCommand}"/>
+        </StackLayout>
+        -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Ingrese su filtro:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Entry  Text="{Binding TextoBuscar}" WidthRequest="150" HorizontalOptions="Start" VerticalOptions="Center"/>           
+        </StackLayout>
         <ListView ItemsSource="{Binding lstPersonList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                  -->  <!-- Este Binding es de un objeto perteneciente a la lista padre o el ItemsSource (lstPersonList) -->
-                   <!-- <TextCell Text="{Binding nombre}" Detail="{Binding descripcion}}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate> 
-        </ListView>
-        -->
-        <ListView ItemsSource="{Binding lstPersonList}" x:Name="lstViewPerson" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding nombre}" Detail="{Binding descripcion}" Command="{Binding EliminarPersonaCommand}" />
+                    <!--<TextCell Text="{Binding nombre}" Detail="{Binding descripcion}"/>-->e
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding nombre}" VerticalOptions="Center"/>
+                            <Image Source="delete.png" x:Name="imgExpan" HorizontalOptions="EndAndExpand" VerticalOptions="Start">
+                                <!-- Asignar un recongnizer de gestos, en este caso el TAB -->
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.BorrarPersonaCommand, Source={x:Reference MainPage}}"  CommandParameter="{Binding id}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate> 
         </ListView>

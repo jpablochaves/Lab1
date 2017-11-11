@@ -13,8 +13,9 @@ namespace Lab1
 		{
 			InitializeComponent();
 
-			MainPage = new Lab1.MainPage();
-		}
+            MainPage = new Lab1.MainPage();
+          //  MainPage = new Lab1.View.FormPage();
+        }
 
 		protected override void OnStart ()
 		{

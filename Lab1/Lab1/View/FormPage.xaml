@@ -2,21 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Name="FormPage"
-             x:Class="Lab1.View.FormPage">
-    <StackLayout Orientation="Horizontal" x:Name="Superior">
-        <Image Source="delete.png" HorizontalOptions="Start" VerticalOptions="Center" />
-        <Label BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-    </StackLayout>
+             x:Class="Lab1.View.FormPage" Title="StackLayout Demos">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0" Padding="0" BackgroundColor="White">
+                <StackLayout BackgroundColor="Silver" HeightRequest="150" Margin="10" Orientation="Horizontal" Padding="10,0,0,0">                    
+                    <Image Source="circle.png" x:Name="circle" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <StackLayout HeightRequest="600" BackgroundColor="Black" Padding="5">
+                    <StackLayout Spacing="0" HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <BoxView BackgroundColor="Blue" HorizontalOptions="FillAndExpand"/>                      
+                    </StackLayout>
+                    <StackLayout Spacing="0" HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand"/>                       
+                    </StackLayout>
+                    <StackLayout Spacing="0"  HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <BoxView BackgroundColor="Orange" HorizontalOptions="FillAndExpand"/>                      
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout HeightRequest="200" BackgroundColor="White" Padding="0,5,0,5">
+                    <BoxView BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>        
+    </ContentPage.Content>
 
-    <StackLayout Orientation="Horizontal" x:Name="Medio">
-        <Image Source="delete.png" HorizontalOptions="Start" VerticalOptions="Center" />
-        <Label BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-    </StackLayout>
-
-    <Frame OutlineColor="Green"  Padding="0">
-        <StackLayout Orientation="Horizontal">
-            <Label HorizontalOptions="Start" VerticalOptions="Center" Text=""></Label>
-        </StackLayout>
-    </Frame>
-    
 </ContentPage>

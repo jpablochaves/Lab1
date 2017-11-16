@@ -9,19 +9,25 @@
                 <StackLayout BackgroundColor="Silver" HeightRequest="150" Margin="10" Orientation="Horizontal" Padding="10,0,0,0">                    
                     <Image Source="circle.png" x:Name="circle" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
-                <StackLayout HeightRequest="600" BackgroundColor="Black" Padding="5">
+                <StackLayout HeightRequest="620" BackgroundColor="Black" Padding="5">
                     <StackLayout Spacing="0" HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <BoxView BackgroundColor="Blue" HorizontalOptions="FillAndExpand"/>                      
                     </StackLayout>
                     <StackLayout Spacing="0" HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <BoxView BackgroundColor="White" HorizontalOptions="FillAndExpand"/>                       
                     </StackLayout>
-                    <StackLayout Spacing="0"  HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="0,0,0,5" Spacing="0"  HeightRequest="200" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <BoxView BackgroundColor="Orange" HorizontalOptions="FillAndExpand"/>                      
                     </StackLayout>
                 </StackLayout>
-                <StackLayout HeightRequest="200" BackgroundColor="White" Padding="0,5,0,5">
-                    <BoxView BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"/>
+                <StackLayout Spacing="0" HeightRequest="100" BackgroundColor="White" Margin="0,10,0,10">
+                    <Button Text="Prueba" TextColor="Black" BackgroundColor="Transparent" BorderColor="Blue" BorderWidth = "2"> 
+                        <Button.BorderRadius>
+                            <OnPlatform x:TypeArguments="x:Int32">
+                                <OnPlatform.Android>3</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.BorderRadius>
+                    </Button>
                 </StackLayout>
             </StackLayout>
         </ScrollView>        

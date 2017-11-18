@@ -1,10 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Name="FormPage"
-             x:Class="Lab1.View.FormPage" Title="StackLayout Demos">
+             x:Class="Lab1.View.FormPage" Title="Detalle">
     <ContentPage.Content>
         <ScrollView>
+            <StackLayout HorizontalOptions="Fill">
+                <!--Detalle Persona-->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Padding="30">
+                    <StackLayout>
+                        <Image Source="{Binding PersonaActual.foto}" HeightRequest="50" WidthRequest="50"/>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="{Binding PersonaActual.nombre}"/>
+                        <Label Text="{Binding PersonaActual.telefono}"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Silver">
+                    <!--Informacion de Persona-->
+                    <StackLayout BackgroundColor="Olive" HeightRequest="50"  HorizontalOptions="Fill" VerticalOptions="Start">
+                        <!--Nombre-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Nombre Completo:"/>
+                            <Label Text="{Binding PersonaActual.nombreCompleto}"/>
+                        </StackLayout>
+                        <!--Telefono-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Telefono:"/>
+                            <Label Text="{Binding PersonaActual.telefono}"/>
+                        </StackLayout>
+                        <!--Direccion-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Telefono:"/>
+                            <Label Text="{Binding PersonaActual.direccion}"/>
+                        </StackLayout>
+                        <!--Fecha Nacimiento-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Telefono:"/>
+                            <Label Text="{Binding PersonaActual.fechaNacimiento}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <!--Lista de Ventas-->
+                    <StackLayout>
+                    </StackLayout>
+                    <!--Cuadro Rojo-->
+                    <StackLayout BackgroundColor="Orange" HeightRequest="50" VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
+
+                    </StackLayout>
+                </StackLayout>
+                <Button Text="Editar" VerticalOptions="End" HeightRequest="50"/>
+            </StackLayout>
+            <!--
             <StackLayout Spacing="0" Padding="0" BackgroundColor="White">
                 <StackLayout BackgroundColor="Silver" HeightRequest="150" Margin="10" Orientation="Horizontal" Padding="10,0,0,0">                    
                     <Image Source="circle.png" x:Name="circle" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
@@ -30,6 +75,7 @@
                     </Button>
                 </StackLayout>
             </StackLayout>
+            -->
         </ScrollView>        
     </ContentPage.Content>
 

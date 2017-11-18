@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using Lab1.View;
 
 namespace Lab1
 {
@@ -13,8 +14,16 @@ namespace Lab1
 		{
 			InitializeComponent();
 
-           // MainPage = new Lab1.MainPage();
-           MainPage = new Lab1.View.FormPage();
+            NavigationPage navigation = new NavigationPage(new MainPage());
+
+            App.Current.MainPage = new MasterDetailPage
+            {
+                Master = new HomeMenu(),
+                Detail = navigation
+            };
+                        
+          //   MainPage = new MainPage();
+          // MainPage = new Lab1.View.FormPage();
         }
 
 		protected override void OnStart ()

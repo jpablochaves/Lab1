@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Lab1.ViewModel;
 
 namespace Lab1.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FormPage : ContentPage
+	public partial class HomeMenu : ContentPage
 	{
-		public FormPage ()
+		public HomeMenu ()
 		{
 			InitializeComponent ();
-            BindingContext = PersonViewModel.GetInstance();
 		}
 	}
 }

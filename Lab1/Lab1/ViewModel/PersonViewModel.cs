@@ -7,13 +7,57 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Lab1.View;
 
 namespace Lab1.ViewModel
 {
     // El INotifyPropertyChanged le notifica a la capa VIEW que algo ha cambiado
     public class PersonViewModel : INotifyPropertyChanged
     {
+        #region Singleton
+        private static PersonViewModel instance = null;
+
+        public static PersonViewModel GetInstance() {
+            if (instance == null)
+            {
+                instance = new PersonViewModel();
+            }
+            return instance;              
+        }
+
+        public static void DeleteInstance() {
+            if (instance != null) {
+                instance = null;
+            } 
+        }
+
+        #endregion Singleton
+
+        private PersonViewModel()
+        {
+            InitClass();
+            InitCommands();
+        }
+
+
         #region Instances
+
+        private PersonModel _PersonaActual { get; set; }
+
+        public PersonModel PersonaActual
+        {
+            get
+            {
+                return _PersonaActual;
+            }
+            set
+            {
+                _PersonaActual = value;
+                onPropertyChanged("PersonaActual");
+            }
+        }
+
+
 
         // Un Interface Command -> Para poder hacer el Bind del componente UI den MainPage.xaml
         public ICommand AgregarPersonaCommand { get; set; }
@@ -21,6 +65,9 @@ namespace Lab1.ViewModel
         public ICommand TextoBuscarCommand { get; set; }
 
         public ICommand BorrarPersonaCommand { get; set; }
+
+        public ICommand VerPersonaCommand { get; set; }
+
 
         //private List<PersonModel> _lstPersonList = new List<PersonModel>();  // Este tipo de Lista no es Observable
 
@@ -84,10 +131,6 @@ namespace Lab1.ViewModel
 
         #endregion
 
-        public PersonViewModel(){
-            InitClass();
-            InitCommands();
-        }
 
         private void InitClass() {
             lstPersonList = PersonModel.ObtenerPersonas();
@@ -98,6 +141,7 @@ namespace Lab1.ViewModel
         private void InitCommands() {
             AgregarPersonaCommand = new Command(AgregarPersona);
             BorrarPersonaCommand = new Command<int>(BorrarPersona);  // se debe indicar que se espera un int
+            VerPersonaCommand = new Command<int>(VerPersona);  // se debe indicar que se espera un int
             // Con nuevo metodo sin boton, usando Entry
         }
 
@@ -112,12 +156,9 @@ namespace Lab1.ViewModel
         // El método que va a ir como objeto en el Command de arriba
         private void AgregarPersona() {
             
-            _lstPersonList.Add(new PersonModel(1,"José Pablo", "Chaves","Alumno de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel(2,"Pablo", "Rivera", "Alumno no matriculado de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel(3,"Mónica", "Bermúdez", "Alumna de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel(4,"Carlos", "Méndez", "Profesor de curso Xamarin"));
-            _lstPersonList.Add(new PersonModel(5,"Federico", "Brenes", "Alumno de curso VMWare"));
-
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Carlos" , apellido1 = "Mendez", apellido2 = ""});
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Nónica", apellido1 = "Bermúdez", apellido2 = "García" });
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "José Pablo", apellido1 = "Chaves", apellido2 = "Arias" });
            // _lstPersonListCopy = _lstPersonList;
            // _lstPersonList.Add(new PersonModel{ nombre = NuevoIngreso, descripcion = "Alumno de Xamarin" });
             Console.WriteLine("Agregadas ->"+_lstPersonList.Count);            
@@ -129,6 +170,12 @@ namespace Lab1.ViewModel
             lstPersonList.Clear();
             lstPersonList = new ObservableCollection<PersonModel>(_lstPersonPivot);
             Console.WriteLine("*** Validacion Count [Lista Pivot="+_lstPersonPivot.Count()+",Lista Observable="+lstPersonList.Count()+"]");
+        }
+
+        private void VerPersona(int idPersona)
+        {
+            PersonaActual = _lstPersonPivot.Where(x => x.id == idPersona).FirstOrDefault();
+            ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new FormPage());
         }
 
         /*

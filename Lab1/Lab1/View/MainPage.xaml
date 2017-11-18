@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Lab1"
              x:Name="MainPage"
-             x:Class="Lab1.MainPage">
+             x:Class="Lab1.View.MainPage">
     <StackLayout>
         <!--
         <StackLayout>
@@ -25,7 +24,7 @@
                             <Image Source="delete.png" x:Name="imgExpan" HorizontalOptions="EndAndExpand" VerticalOptions="Start">
                                 <!-- Asignar un recongnizer de gestos, en este caso el TAB -->
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.BorrarPersonaCommand, Source={x:Reference MainPage}}"  CommandParameter="{Binding id}" />
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.VerPersonaCommand, Source={x:Reference MainPage}}"  CommandParameter="{Binding id}" />
                                 </Image.GestureRecognizers>
                             </Image>
                         </StackLayout>

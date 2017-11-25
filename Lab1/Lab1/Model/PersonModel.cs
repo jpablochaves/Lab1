@@ -35,9 +35,10 @@ namespace Lab1.Model
         {
             ObservableCollection<PersonModel> lst = new ObservableCollection<PersonModel>();
 
-            lst.Add(new PersonModel { id = 1, nombre = "Carlos" });
-            lst.Add(new PersonModel { id = 2, nombre = "Pablo" });
-            lst.Add(new PersonModel { id = 3, nombre = "Mónica" });
+            lst.Add(new PersonModel { id = 1, nombre = "Federico", apellido1 = "Brenes", apellido2 = "Rueda", telefono = "88995656", fechaNacimiento = new DateTime(1970, 1, 1), direccion = "Cartago, Paraíso", sexo = "M", observaciones = "Alumno de VMWare" });
+            lst.Add(new PersonModel { id = 1, nombre = "José Pablo", apellido1 = "Chaves", apellido2 = "Arias", telefono = "87069998", fechaNacimiento = new DateTime(1987, 8, 26), direccion = "San José, Coronado", sexo = "M", observaciones = "Alumno de Xamarin" });
+            lst.Add(new PersonModel { id = 1, nombre = "Mónica", apellido1 = "Bermúdez", apellido2 = "García", telefono = "88995656", fechaNacimiento = new DateTime(1985, 1, 1), direccion = "Heredia, San Francisco", sexo = "F", observaciones = "Alumna de Xamarin" });
+
 
             return lst;
 

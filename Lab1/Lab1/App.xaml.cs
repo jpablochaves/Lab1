@@ -14,6 +14,7 @@ namespace Lab1
 		{
 			InitializeComponent();
 
+            /*
             NavigationPage navigation = new NavigationPage(new MainPage());
 
             App.Current.MainPage = new MasterDetailPage
@@ -21,9 +22,10 @@ namespace Lab1
                 Master = new HomeMenu(),
                 Detail = navigation
             };
+            */
                         
-          //   MainPage = new MainPage();
-          // MainPage = new Lab1.View.FormPage();
+            // MainPage = new MainPage();
+             MainPage = new Lab1.View.Login();
         }
 
 		protected override void OnStart ()

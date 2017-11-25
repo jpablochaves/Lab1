@@ -156,11 +156,11 @@ namespace Lab1.ViewModel
         // El método que va a ir como objeto en el Command de arriba
         private void AgregarPersona() {
             
-            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Carlos" , apellido1 = "Mendez", apellido2 = ""});
-            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Nónica", apellido1 = "Bermúdez", apellido2 = "García" });
-            _lstPersonList.Add(new PersonModel { id = 1, nombre = "José Pablo", apellido1 = "Chaves", apellido2 = "Arias" });
-           // _lstPersonListCopy = _lstPersonList;
-           // _lstPersonList.Add(new PersonModel{ nombre = NuevoIngreso, descripcion = "Alumno de Xamarin" });
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Federico" , apellido1 = "Brenes", apellido2 = "Rueda", telefono = "88995656", fechaNacimiento = new DateTime(1970,1,1), direccion = "Cartago, Paraíso", sexo = "M", observaciones="Alumno de VMWare"});
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "José Pablo", apellido1 = "Chaves", apellido2 = "Arias", telefono = "87069998", fechaNacimiento = new DateTime(1987, 8, 26), direccion = "San José, Coronado", sexo = "M", observaciones = "Alumno de Xamarin" });
+            _lstPersonList.Add(new PersonModel { id = 1, nombre = "Mónica", apellido1 = "Bermúdez", apellido2 = "García", telefono = "88995656", fechaNacimiento = new DateTime(1985, 1, 1), direccion = "Heredia, San Francisco", sexo = "F", observaciones = "Alumna de Xamarin" });
+            // _lstPersonListCopy = _lstPersonList;
+            // _lstPersonList.Add(new PersonModel{ nombre = NuevoIngreso, descripcion = "Alumno de Xamarin" });
             Console.WriteLine("Agregadas ->"+_lstPersonList.Count);            
         }
 
